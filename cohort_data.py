@@ -38,18 +38,34 @@ def sort_by_cohort(filename):
         ["Euan Abercrombie", "Katie Bell", "Lavender Brown", ...]]
 
     """
+    with open(filename) as cohort_data:
 
-    all_students = []
-    winter_16 = []
-    spring_16 = []
-    summer_16 = []
-    fall_15 = []
-    ghosts = []
+        winter_16 = sorted([])
+        spring_16 = sorted([])
+        summer_16 = sorted([])
+        fall_15 = sorted([])
+        ghosts = sorted([])
+        all_students = sorted([fall_15, spring_16, summer_16, winter_16, ghosts])
 
-    # Code goes here
+        for line in cohort_data:
+            line = line.rstrip()
+            data = line.split("|")
+            first_name = data[0]
+            last_name = data[1]
+            full_name = first_name + " " + last_name
+            cohort = data[4]
+            if cohort == "Winter 2016":
+                winter_16.append(full_name)
+            elif cohort == "Spring 2016":
+                spring_16.append(full_name)
+            elif cohort == "Summer 2016":
+                summer_16.append(full_name)
+            elif cohort == "Fall 2015":
+                fall_15.append(full_name)
+            elif cohort == "G":
+                ghosts.append(full_name)
 
-    return all_students
-
+        return all_students
 
 def students_by_house(filename):
     """TODO: Sort students by house.
@@ -170,8 +186,8 @@ def find_house_members_by_student_name(student_list):
 
 # Here is some useful code to run these functions!
 
-print unique_houses("cohort_data.txt")
-# print sort_by_cohort("cohort_data.txt")
+# print unique_houses("cohort_data.txt")
+print sort_by_cohort("cohort_data.txt")
 # print students_by_house("cohort_data.txt")
 # all_students_data = all_students_tuple_list("cohort_data.txt")
 # print all_students_data
